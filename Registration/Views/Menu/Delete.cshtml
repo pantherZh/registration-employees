@@ -1,0 +1,36 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Registration.Models.Employee
+<h2>Delete Employee</h2>
+<dl>
+    <dt>Name</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+    <dt>SurName</dt>
+    <dd>
+        @Html.DisplayFor(model => model.SurName)
+    </dd>
+    <dt>Patronymic</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Patronymic)
+    </dd>
+    <dt>EmploymentDate</dt>
+    <dd>
+        @Html.DisplayFor(model => model.EmploymentDate)
+    </dd>
+    <dt>Position</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Position)
+    </dd>
+    <dt>CompanyId</dt>
+    <dd>
+        @Html.DisplayFor(model => model.CompanyId)
+    </dd>
+</dl>
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Delete" />
+}

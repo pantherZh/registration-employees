@@ -38,8 +38,19 @@
             }
         </tbody>
     </table>
-    <button type="button" class="btn btn-info">Add new Employee</button>
-    <button type="button" class="btn btn-info">Edit Employee</button>
-    <button type="button" class="btn btn-info">Delete Employee</button>
+    @using (Html.BeginForm("Add", "Menu", FormMethod.Post))
+    {
+        <button name="action" value="add">Add new Employee</button>
+    }
+    <br>
+    @using (Html.BeginForm("Edit", "Menu", FormMethod.Post))
+    {
+        <button name="action" value="edit">Edit Employee</button>
+    }
+    <br>
+    @using (Html.BeginForm("Delete", "Menu", FormMethod.Post))
+    {
+        <button name="action" value="edit">Delete Employee</button>
+    }
 </body>
 </html>

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\alesy\\source\\repos\\Registration\\Registration\\Registration.csproj": {}
+    "C:\\Users\\alesy\\source\\repos\\registration-employees\\Registration\\Registration.csproj": {}
   },
   "projects": {
-    "C:\\Users\\alesy\\source\\repos\\Registration\\Registration\\Registration.csproj": {
+    "C:\\Users\\alesy\\source\\repos\\registration-employees\\Registration\\Registration.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alesy\\source\\repos\\Registration\\Registration\\Registration.csproj",
+        "projectUniqueName": "C:\\Users\\alesy\\source\\repos\\registration-employees\\Registration\\Registration.csproj",
         "projectName": "Registration",
-        "projectPath": "C:\\Users\\alesy\\source\\repos\\Registration\\Registration\\Registration.csproj",
+        "projectPath": "C:\\Users\\alesy\\source\\repos\\registration-employees\\Registration\\Registration.csproj",
         "packagesPath": "C:\\Users\\alesy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alesy\\source\\repos\\Registration\\Registration\\obj\\",
+        "outputPath": "C:\\Users\\alesy\\source\\repos\\registration-employees\\Registration\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\alesy\\AppData\\Roaming\\NuGet\\NuGet.Config",

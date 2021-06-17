@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Xp2YuDDmqZ77dkfgJzCDHDcGL1giWr4PunOCymc972mLCAwyUnsfbrrR1eXiISCc50iLTRGoActNL6v7UeEzjQ==",
+  "dgSpecHash": "aK9qwRp3+/OGJVtYdnM9wojkwN/38P0nN+cXZidc/KjxVG9v3zseb7i7IVAjejMyrXcoVMY+ZPH6ekrl5Hp/fQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\alesy\\source\\repos\\Registration\\Registration\\Registration.csproj",
+  "projectFilePath": "C:\\Users\\alesy\\source\\repos\\registration-employees\\Registration\\Registration.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alesy\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",
     "C:\\Users\\alesy\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
