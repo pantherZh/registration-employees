@@ -4,8 +4,9 @@
 @model Registration.Models.Employee
 
 <h2>Employee #@Model.Id</h2>
-
-@Html.HiddenFor(m => m.Id)
+@using (Html.BeginForm("Edit", "Menu", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id)
 
 @Html.LabelFor(model => model.Name, "Name")
 <br />
@@ -37,8 +38,5 @@
 @Html.EditorFor(model => model.Company.Name)
 <br />
 <br />
-
-@using (Html.BeginForm())
-{
 <input type="submit" value="Edit" />
 }

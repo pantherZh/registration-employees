@@ -112,8 +112,6 @@ C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcor
 C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Registration.RazorCoreGenerate.cache
 C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
-C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\Menu\AddEmployee.cshtml.g.cs
-C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\Menu\Company.cshtml.g.cs
 C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\Menu\Employee.cshtml.g.cs
 C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
@@ -127,6 +125,11 @@ C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcor
 C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Registration.dll
 C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Registration.pdb
 C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Registration.genruntimeconfig.cache
-C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\Menu\EditEmployee.cshtml.g.cs
 C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\Menu\Delete.cshtml.g.cs
 C:\Users\alesy\source\repos\registration-employees\Registration\bin\Debug\netcoreapp3.1\stylecop.json
+C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\CMenu\Add.cshtml.g.cs
+C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\CMenu\Company.cshtml.g.cs
+C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\CMenu\Delete.cshtml.g.cs
+C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\CMenu\Edit.cshtml.g.cs
+C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\Menu\Add.cshtml.g.cs
+C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\Menu\Edit.cshtml.g.cs

@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Registration.Models.Company
+
+<h2>Company #@Model.Id</h2>
+@using (Html.BeginForm("Edit", "CMenu", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id)
+
+@Html.LabelFor(model => model.Name, "Name")
+<br />
+@Html.EditorFor(model => model.Name)
+<br />
+<br />
+@Html.LabelFor(model => model.Form, "Form")
+<br />
+@Html.EditorFor(model => model.Form)
+<br />
+<br />
+<input type="submit" value="Edit" />
+}

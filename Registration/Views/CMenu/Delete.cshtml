@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Registration.Models.Company
+<h2>Delete Company</h2>
+
+<dl>
+    <dt>Name</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+    <dt>Form</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Form)
+    </dd>
+</dl>
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Delete" />
+}

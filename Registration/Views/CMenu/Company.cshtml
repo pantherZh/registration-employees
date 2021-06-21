@@ -17,18 +17,26 @@
                 <th scope="col">Number</th>
                 <th scope="col">Name</th>
                 <th scope="col">Form</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
-             {
+            {
                 <tr>
                     <th scope="row">@item.Id</th>
                     <td>@item.Name</td>
                     <td>@item.Form</td>
+                    <td><a asp-controller="CMenu" asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+                    <td><a asp-controller="CMenu" asp-action="Edit" asp-route-id="@item.Id">Edit</a></td>
                 </tr>
-             }
+            }
         </tbody>
     </table>
+    @using (Html.BeginForm("Add", "CMenu", FormMethod.Post))
+    {
+        <button name="action" value="add">Add new Company</button>
+    }
 </body>
 </html>

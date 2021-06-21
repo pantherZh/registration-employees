@@ -87,6 +87,8 @@ namespace Registration.Repository
                                 "Id = @Id";
 
             var parameters = new DynamicParameters();
+
+            parameters.Add("Id", employee.Id, DbType.Int32);
             parameters.Add("Name", employee.Name, DbType.String);
             parameters.Add("SurName", employee.SurName, DbType.String);
             parameters.Add("Patronymic", employee.Patronymic, DbType.String);

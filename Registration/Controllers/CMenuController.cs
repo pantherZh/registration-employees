@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace Registration.Controllers
 {
-    public class MenuController : Controller
+    public class CMenuController : Controller
     {
-        private readonly IEmployeeRepository _employeeRepo;
+        private readonly ICompanyRepository _companyRepo;
 
-        public MenuController(IEmployeeRepository employeeRepo)
+        public CMenuController(ICompanyRepository companyRepo)
         {
-            _employeeRepo = employeeRepo;
+            _companyRepo = companyRepo;
         }
 
         [HttpGet]
-        public async Task<IActionResult> EmployeeAsync()
+        public async Task<IActionResult> CompanyAsync()
         {
             try
             {
-                var employees = await _employeeRepo.Include();
-                return View(employees);
+                var companies = await _companyRepo.SelectAll();
+                return View(companies);
             }
             catch (Exception ex)
             {
@@ -36,13 +36,13 @@ namespace Registration.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateEmployeeDto employee)
+        public async Task<IActionResult> Create(CreateCompanyDto company)
         {
             try
             {
-                var createdEmployee = await _employeeRepo.Insert(employee);
-                CreatedAtRoute("EmployeeById", new { id = createdEmployee.Id }, createdEmployee);
-                return RedirectToAction("Employee");
+                var createdCompany = await _companyRepo.Insert(company);
+                CreatedAtRoute("CompanyById", new { id = createdCompany.Id }, createdCompany);
+                return RedirectToAction("Company");
             }
             catch (Exception ex)
             {
@@ -52,22 +52,22 @@ namespace Registration.Controllers
 
         public async Task<ActionResult> EditAsync(int id)
         {
-            var dbEmployee = await _employeeRepo.SelectById(id);
-            if (dbEmployee == null)
+            var dbCompany = await _companyRepo.SelectById(id);
+            if (dbCompany == null)
                 return NotFound();
-            return View(dbEmployee);
+            return View(dbCompany);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, EditEmployeeDto employee)
+        public async Task<IActionResult> Edit(int id, EditCompanyDto company)
         {
             try
             {
-                var dbEmployee = await _employeeRepo.SelectById(id);
-                if (dbEmployee == null)
+                var dbCompany = await _companyRepo.SelectById(id);
+                if (dbCompany == null)
                     return NotFound();
-                await _employeeRepo.Update(id, employee);
-                return RedirectToAction("Employee");
+                await _companyRepo.Update(id, company);
+                return RedirectToAction("Company");
             }
             catch (Exception ex)
             {
@@ -80,10 +80,10 @@ namespace Registration.Controllers
         {
             try
             {
-                var dbEmployee = await _employeeRepo.SelectById(id);
-                if (dbEmployee == null)
+                var dbCompany = await _companyRepo.SelectById(id);
+                if (dbCompany == null)
                     return NotFound();
-                return View(dbEmployee);
+                return View(dbCompany);
             }
             catch (Exception ex)
             {
@@ -92,15 +92,15 @@ namespace Registration.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteCompany(int id)
         {
             try
             {
-                var dbEmployee = await _employeeRepo.SelectById(id);
-                if (dbEmployee == null)
+                var dbCompany = await _companyRepo.SelectById(id);
+                if (dbCompany == null)
                     return NotFound();
-                await _employeeRepo.DeleteById(id);
-                return RedirectToAction("Employee");
+                await _companyRepo.DeleteById(id);
+                return RedirectToAction("Company");
             }
             catch (Exception ex)
             {

@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Registration.Context;
 using Registration.Contract;
+using Registration.Dto;
 using Registration.Models;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace Registration.Repository
             _ctx = ctx;
         }
 
-        public async Task<IEnumerable<Company>> GetCompanies()
+        public async Task<IEnumerable<Company>> SelectAll()
         {
             string query = "SELECT * FROM Companies";
             using (var connection = _ctx.CreateConnection())
@@ -29,33 +30,77 @@ namespace Registration.Repository
             }
         }
 
-        public async Task<Company> GetCompany(int id)
+        public async Task<Company> SelectById(int id)
         {
-            string query = "SELECT * FROM " +
+            var query = "SELECT * FROM " +
+                            "Companies " +
+                        "WHERE " +
+                            "Id = @Id";
+
+            using (var connection = _ctx.CreateConnection())
+            {
+                var companies = await connection.QuerySingleOrDefaultAsync<Company>(query, new { id });
+                return companies;
+            }
+        }
+
+        public async Task<Company> Insert(CreateCompanyDto company)
+        {
+            string query = "INSERT INTO " +
+                                "Companies (Name, Form) " +
+                            "VALUES " +
+                                 "(@Name, @Form) " +
+                            "SELECT CAST(SCOPE_IDENTITY() as int)";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("Name", company.Name, DbType.String);
+            parameters.Add("Form", company.Form, DbType.String);
+
+            using (var connection = _ctx.CreateConnection())
+            {
+                int id = await connection.QuerySingleAsync<int>(query, parameters);
+                var createdCompany = new Company
+                {
+                    Id = id,
+                    Name = company.Name,
+                    Form = company.Form,
+                };
+                return createdCompany;
+            }
+        }
+
+        public async Task Update(int id, EditCompanyDto company)
+        {
+            string query = "UPDATE " +
+                                "Companies " +
+                            "SET " +
+                                "Name = @Name, Form = @Form " +
+                             "WHERE " +
+                                "Id = @Id";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("Id", company.Id, DbType.Int32);
+            parameters.Add("Name", company.Name, DbType.String);
+            parameters.Add("Form", company.Form, DbType.String);
+
+            using (var connection = _ctx.CreateConnection())
+            {
+                await connection.ExecuteAsync(query, parameters);
+            }
+        }
+
+        public async Task DeleteById(int id)
+        {
+            string query = "DELETE FROM " +
                                 "Companies " +
                             "WHERE " +
                                 "Id = @Id";
-
             using (var connection = _ctx.CreateConnection())
             {
-                var company = await connection.QuerySingleOrDefaultAsync<Company>(query, new { id });
-
-                return company;
+                await connection.ExecuteAsync(query, new { id });
             }
         }
 
-
-        public async Task<Company> GetCompanyByEmployeeId(int id)
-        {
-            var procedureName = "ShowCompanyForProvidedEmployeeId";
-            var parameters = new DynamicParameters();
-            parameters.Add("Id", id, DbType.Int32, ParameterDirection.Input);
-            using (var connection = _ctx.CreateConnection())
-            {
-                var company = await connection.QueryFirstOrDefaultAsync<Company>
-                    (procedureName, parameters, commandType: CommandType.StoredProcedure);
-                return company;
-            }
-        }
+        public Task<IEnumerable<Company>> Include() => throw new NotImplementedException();
     }
 }

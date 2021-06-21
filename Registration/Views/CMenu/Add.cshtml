@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Registration.Models.Company
+@{
+    ViewData["Title"] = "Add Company";
+}
+<h2>@ViewData["Title"]</h2>
+
+@using (Html.BeginForm("Create", "CMenu", FormMethod.Post))
+{
+    @Html.LabelFor(model => model.Name, "Name")
+    <br />
+    @Html.EditorFor(model => model.Name)
+    <br />
+    <br />
+    @Html.LabelFor(model => model.Form, "Form")
+    <br />
+    @Html.EditorFor(model => model.Form)
+    <br />
+    <br />
+    <input type="submit" value="Add" />
+}
