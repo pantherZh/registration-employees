@@ -2,47 +2,43 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model Registration.Models.Employee
-@{
-    ViewData["Title"] = "Edit Employee";
-}
-<h2>@ViewData["Title"]</h2>
 
-@using (Html.BeginForm("CreateEmployee", "Menu", FormMethod.Post))
+<h2>Employee #@Model.Id</h2>
+
+@Html.HiddenFor(m => m.Id)
+
+@Html.LabelFor(model => model.Name, "Name")
+<br />
+@Html.EditorFor(model => model.Name)
+<br />
+<br />
+@Html.LabelFor(model => model.SurName, "SurName")
+<br />
+@Html.EditorFor(model => model.SurName)
+<br />
+<br />
+@Html.LabelFor(model => model.Patronymic, "Patronymic")
+<br />
+@Html.EditorFor(model => model.Patronymic)
+<br />
+<br />
+@Html.LabelFor(model => model.EmploymentDate, "Employment Date")
+<br />
+@Html.EditorFor(model => model.EmploymentDate)
+<br />
+<br />
+@Html.LabelFor(model => model.Position, "Position")
+<br />
+@Html.EditorFor(model => model.Position)
+<br />
+<br />
+@Html.LabelFor(model => model.Company.Name, "Company")
+<br />
+@Html.EditorFor(model => model.Company.Name)
+<br />
+<br />
+
+@using (Html.BeginForm())
 {
-    @Html.LabelFor(model => model.Id, "Id")
-    <br />
-    @Html.EditorFor(model => model.Id)
-    <br />
-    <br />
-    @Html.LabelFor(model => model.Name, "Name")
-    <br />
-    @Html.EditorFor(model => model.Name)
-    <br />
-    <br />
-    @Html.LabelFor(model => model.SurName, "SurName")
-    <br />
-    @Html.EditorFor(model => model.SurName)
-    <br />
-    <br />
-    @Html.LabelFor(model => model.Patronymic, "Patronymic")
-    <br />
-    @Html.EditorFor(model => model.Patronymic)
-    <br />
-    <br />
-    @Html.LabelFor(model => model.EmploymentDate, "Employment Date")
-    <br />
-    @Html.EditorFor(model => model.EmploymentDate)
-    <br />
-    <br />
-    @Html.LabelFor(model => model.Position, "Position")
-    <br />
-    @Html.EditorFor(model => model.Position)
-    <br />
-    <br />
-    @Html.LabelFor(model => model.CompanyId, "CompanyId")
-    <br />
-    @Html.EditorFor(model => model.CompanyId)
-    <br />
-    <br />
-    <input type="submit" value="Edit" />
+<input type="submit" value="Edit" />
 }

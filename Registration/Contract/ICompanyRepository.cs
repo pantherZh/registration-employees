@@ -9,5 +9,7 @@ namespace Registration.Contract
     public interface ICompanyRepository
     {
         public Task<IEnumerable<Company>> GetCompanies();
+
+        public Task<Company> GetCompanyByEmployeeId(int id);
     }
 }

@@ -21,36 +21,30 @@
                 <th scope="col">Employment Date</th>
                 <th scope="col">Position</th>
                 <th scope="col">Company</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <th scope="row">@item.Id</th>
-                    <td>@item.SurName</td>
-                    <td>@item.Name</td>
-                    <td>@item.Patronymic</td>
-                    <td>@item.EmploymentDate</td>
-                    <td>@item.Position</td>
-                    <td>@item.CompanyId</td>
-                </tr>
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@item.SurName</td>
+                <td>@item.Name</td>
+                <td>@item.Patronymic</td>
+                <td>@item.EmploymentDate</td>
+                <td>@item.Position</td>
+                <td>@item.Company.Name</td>
+                <td><a asp-controller="Menu" asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+                <td><a asp-controller="Menu" asp-action="Edit" asp-route-id="@item.Id">Edit</a></td>
+            </tr>
             }
         </tbody>
     </table>
     @using (Html.BeginForm("Add", "Menu", FormMethod.Post))
     {
         <button name="action" value="add">Add new Employee</button>
-    }
-    <br>
-    @using (Html.BeginForm("Edit", "Menu", FormMethod.Post))
-    {
-        <button name="action" value="edit">Edit Employee</button>
-    }
-    <br>
-    @using (Html.BeginForm("Delete", "Menu", FormMethod.Post))
-    {
-        <button name="action" value="edit">Delete Employee</button>
     }
 </body>
 </html>

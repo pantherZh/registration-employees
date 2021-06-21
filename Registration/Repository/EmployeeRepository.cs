@@ -12,25 +12,31 @@ namespace Registration.Repository
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private readonly DapperContext _context;
-        public EmployeeRepository(DapperContext context)
+        private readonly DapperContext _ctx;
+
+        public EmployeeRepository(DapperContext ctx)
         {
-            _context = context;
+            _ctx = ctx;
         }
-        public async Task<IEnumerable<Employee>> GetEmployees()
+
+        public async Task<IEnumerable<Employee>> SelectAll()
         {
-            var query = "SELECT * FROM Employees";
-            using (var connection = _context.CreateConnection())
+            string query = "SELECT * FROM Employees";
+            using (var connection = _ctx.CreateConnection())
             {
                 var employees = await connection.QueryAsync<Employee>(query);
                 return employees.ToList();
             }
         }
 
-        public async Task<Employee> CreateEmployee(EmployeeForCreationDto employee)
+        public async Task<Employee> Insert(CreateEmployeeDto employee)
         {
-            var query = "INSERT INTO Employees (SurName, Name, Patronymic, EmploymentDate, Position, CompanyId ) VALUES (@SurName, @Name, @Patronymic, @EmploymentDate, @Position, @CompanyId)" +
-                "SELECT CAST(SCOPE_IDENTITY() as int)";
+            string query = "INSERT INTO " +
+                                "Employees (SurName, Name, Patronymic, EmploymentDate, Position, CompanyId) " +
+                            "VALUES " +
+                                 "(@SurName, @Name, @Patronymic, @EmploymentDate, @Position, @CompanyId) " +
+                            "SELECT CAST(SCOPE_IDENTITY() as int)";
+
             var parameters = new DynamicParameters();
             parameters.Add("Name", employee.Name, DbType.String);
             parameters.Add("SurName", employee.SurName, DbType.String);
@@ -38,9 +44,10 @@ namespace Registration.Repository
             parameters.Add("EmploymentDate", employee.EmploymentDate, DbType.DateTime);
             parameters.Add("Position", employee.Position, DbType.Int32);
             parameters.Add("CompanyId", employee.CompanyId, DbType.Int32);
-            using (var connection = _context.CreateConnection())
+
+            using (var connection = _ctx.CreateConnection())
             {
-                var id = await connection.QuerySingleAsync<int>(query, parameters);
+                int id = await connection.QuerySingleAsync<int>(query, parameters);
                 var createdEmployee = new Employee
                 {
                     Id = id,
@@ -49,25 +56,36 @@ namespace Registration.Repository
                     Patronymic = employee.Patronymic,
                     EmploymentDate = employee.EmploymentDate,
                     Position = employee.Position,
-                    CompanyId = employee.CompanyId
+                    CompanyId = employee.CompanyId,
+
                 };
                 return createdEmployee;
             }
         }
-        public async Task<Employee> GetEmployee(int id)
-        {
-            var query = "SELECT * FROM Employees WHERE Id = @Id";
 
-            using (var connection = _context.CreateConnection())
+        public async Task<Employee> SelectById(int id)
+        {
+            var query = "SELECT * FROM " +
+                            "Employees " +
+                        "WHERE " +
+                            "Id = @Id";
+
+            using (var connection = _ctx.CreateConnection())
             {
                 var employee = await connection.QuerySingleOrDefaultAsync<Employee>(query, new { id });
-
                 return employee;
             }
         }
-        public async Task UpdateEmployee(int id, EmployeeForEditDto employee)
+
+        public async Task Update(int id, EditEmployeeDto employee)
         {
-            var query = "UPDATE Employees SET Name = @Name, SurName = @SurName, Patronymic = @Patronymic, EmploymentDate = @EmploymentDate, Position = @Position, CompanyId = @CompanyId WHERE Id = @Id";
+            string query = "UPDATE " +
+                                "Employees " +
+                            "SET " +
+                                "Name = @Name, SurName = @SurName, Patronymic = @Patronymic, EmploymentDate = @EmploymentDate, Position = @Position, CompanyId = @CompanyId " +
+                             "WHERE " +
+                                "Id = @Id";
+
             var parameters = new DynamicParameters();
             parameters.Add("Name", employee.Name, DbType.String);
             parameters.Add("SurName", employee.SurName, DbType.String);
@@ -75,17 +93,44 @@ namespace Registration.Repository
             parameters.Add("EmploymentDate", employee.EmploymentDate, DbType.DateTime);
             parameters.Add("Position", employee.Position, DbType.Int32);
             parameters.Add("CompanyId", employee.CompanyId, DbType.Int32);
-            using (var connection = _context.CreateConnection())
+
+            using (var connection = _ctx.CreateConnection())
             {
                 await connection.ExecuteAsync(query, parameters);
             }
         }
-        public async Task DeleteEmployee(int id)
+
+        public async Task DeleteById(int id)
         {
-            var query = "DELETE FROM Employees WHERE Id = @Id";
-            using (var connection = _context.CreateConnection())
+            string query = "DELETE FROM " +
+                                "Employees " +
+                            "WHERE " +
+                                "Id = @Id";
+            using (var connection = _ctx.CreateConnection())
             {
                 await connection.ExecuteAsync(query, new { id });
+            }
+        }
+
+        public async Task<IEnumerable<Employee>> Include()
+        {
+            string query = "SELECT " +
+                                "[u].*, [c].[Id], [c].[Name], [c].[Form] " +
+                            "FROM " +
+                                "[Employees] AS [u] " +
+                            "LEFT JOIN " +
+                                "[Companies] AS [c] " +
+                            "ON " +
+                                "[u].[CompanyId] = [c].[Id]";
+
+            using (var connection = _ctx.CreateConnection())
+            {
+                var employees = await connection.QueryAsync<Employee, Company, Employee>(query, (u, c1) =>
+                {
+                    u.Company = new Company { Id = c1.Id, Name = c1.Name, Form = c1.Form};
+                    return u;
+                });
+                return employees;
             }
         }
     }

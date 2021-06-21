@@ -2,8 +2,6 @@
 using Registration.Contract;
 using Registration.Dto;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Registration.Controllers
@@ -12,6 +10,7 @@ namespace Registration.Controllers
     {
         private readonly ICompanyRepository _companyRepo;
         private readonly IEmployeeRepository _employeeRepo;
+
         public MenuController(ICompanyRepository companyRepo, IEmployeeRepository employeeRepo)
         {
             _companyRepo = companyRepo;
@@ -21,19 +20,16 @@ namespace Registration.Controllers
         [HttpGet]
         public async Task<IActionResult> EmployeeAsync()
         {
-            dynamic employees;
             try
             {
-                employees = await _employeeRepo.GetEmployees();
+                var employees = await _employeeRepo.Include();
+                return View(employees);
             }
             catch (Exception ex)
             {
-                //log error
                 return StatusCode(500, ex.Message);
             }
-            return View(employees);
         }
-
 
         [HttpGet]
         public async Task<IActionResult> CompanyAsync()
@@ -47,6 +43,7 @@ namespace Registration.Controllers
             {
                 return StatusCode(500, ex.Message);
             }
+
             return View(companies);
         }
 
@@ -55,34 +52,15 @@ namespace Registration.Controllers
         {
             return View("~/Views/Menu/AddEmployee.cshtml");
         }
+
         [HttpPost]
-        public async Task<IActionResult> CreateEmployee(EmployeeForCreationDto employee)
+        public async Task<IActionResult> CreateEmployee(CreateEmployeeDto employee)
         {
             try
             {
-                var createdEmployee = await _employeeRepo.CreateEmployee(employee);
-                return CreatedAtRoute("EmployeeById", new { id = createdEmployee.Id }, createdEmployee);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
-        }
-        [HttpPost]
-        public ActionResult Edit()
-        {
-            return View("~/Views/Menu/EditEmployee.cshtml");
-        }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCompany(int id, EmployeeForEditDto employee)
-        {
-            try
-            {
-                var dbEmployee = await _employeeRepo.GetEmployee(id);
-                if (dbEmployee == null)
-                    return NotFound();
-                await _employeeRepo.UpdateEmployee(id, employee);
-                return NoContent();
+                var createdEmployee = await _employeeRepo.Insert(employee);
+                CreatedAtRoute("EmployeeById", new { id = createdEmployee.Id }, createdEmployee);
+                return RedirectToAction("Employee");
             }
             catch (Exception ex)
             {
@@ -90,21 +68,57 @@ namespace Registration.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<ActionResult> DeleteAsync()
+        public async Task<ActionResult> EditAsync(int id)
         {
-            return View("~/Views/Menu/DeleteEmployee.cshtml");
+            var dbEmployee = await _employeeRepo.SelectById(id);
+            if (dbEmployee == null)
+                return NotFound();
+            return View("~/Views/Menu/EditEmployee.cshtml", dbEmployee);
         }
-        [HttpDelete("{id}")]
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditEmployeeDto employee)
+        {
+            try
+            {
+                var dbEmployee = await _employeeRepo.SelectById(id);
+                if (dbEmployee == null)
+                    return NotFound();
+                await _employeeRepo.Update(id, employee);
+                return RedirectToAction("Employee");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> DeleteAsync(int id)
+        {
+            try
+            {
+                var dbEmployee = await _employeeRepo.SelectById(id);
+                if (dbEmployee == null)
+                    return NotFound();
+                return View(dbEmployee);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteEmployee(int id)
         {
             try
             {
-                var dbEmployee = await _employeeRepo.GetEmployee(id);
+                var dbEmployee = await _employeeRepo.SelectById(id);
                 if (dbEmployee == null)
                     return NotFound();
-                await _employeeRepo.DeleteEmployee(id);
-                return NoContent();
+                await _employeeRepo.DeleteById(id);
+                return RedirectToAction("Employee");
             }
             catch (Exception ex)
             {

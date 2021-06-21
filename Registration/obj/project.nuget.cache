@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "aK9qwRp3+/OGJVtYdnM9wojkwN/38P0nN+cXZidc/KjxVG9v3zseb7i7IVAjejMyrXcoVMY+ZPH6ekrl5Hp/fQ==",
+  "dgSpecHash": "ynDIwoI2rvdOJxQIygUzNWJtzDihftWj2WhHQBa2EEIelN1ncZYkkrpg0vKas1NxG5LaYlBxWrhbdtZvUx++xQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\alesy\\source\\repos\\registration-employees\\Registration\\Registration.csproj",
   "expectedPackageFiles": [
@@ -79,6 +79,8 @@
     "C:\\Users\\alesy\\.nuget\\packages\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\alesy\\.nuget\\packages\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\alesy\\.nuget\\packages\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "C:\\Users\\alesy\\.nuget\\packages\\stylecop.analyzers\\1.2.0-beta.66\\stylecop.analyzers.1.2.0-beta.66.nupkg.sha512",
+    "C:\\Users\\alesy\\.nuget\\packages\\stylecop.analyzers.unstable\\1.2.0.66\\stylecop.analyzers.unstable.1.2.0.66.nupkg.sha512",
     "C:\\Users\\alesy\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\alesy\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\alesy\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

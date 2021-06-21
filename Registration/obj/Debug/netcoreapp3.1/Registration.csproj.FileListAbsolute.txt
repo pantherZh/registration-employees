@@ -129,3 +129,4 @@ C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcor
 C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Registration.genruntimeconfig.cache
 C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\Menu\EditEmployee.cshtml.g.cs
 C:\Users\alesy\source\repos\registration-employees\Registration\obj\Debug\netcoreapp3.1\Razor\Views\Menu\Delete.cshtml.g.cs
+C:\Users\alesy\source\repos\registration-employees\Registration\bin\Debug\netcoreapp3.1\stylecop.json
